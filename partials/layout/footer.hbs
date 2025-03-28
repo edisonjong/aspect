@@ -1,0 +1,11 @@
+<footer class="footer">
+	<nav class="navigation{{#unless @site.twitter}}{{#unless @site.facebook}} navigation-hide{{/unless}}{{/unless}}" aria-label="{{t "Footer Socials Navigation"}}">
+		{{> "components/social-links"}}
+	</nav>
+
+	<nav class="navigation navigation-secondary" aria-label="{{t "Footer Secondary Navigation"}}">
+		{{navigation type="secondary" show_icon=false}}
+	</nav>
+
+	{{> "layout/footer-copyright"}}
+</footer>

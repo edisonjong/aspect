@@ -1,0 +1,7 @@
+.section-featured {
+	position: relative;
+
+	.section-tags + & {
+		margin-top: calc(var(--spacing-10) * -1 + var(--spacing-9));
+	}
+}

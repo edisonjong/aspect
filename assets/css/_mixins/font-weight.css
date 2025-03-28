@@ -1,0 +1,9 @@
+@define-mixin font-weight $weight {
+	font-weight: var(--font-weight-$(weight));
+	font-variation-settings: 'wght' var(--font-weight-$(weight));
+}
+
+@define-mixin font-weight-custom $weight_default, $weight_variation {
+	font-weight: var(--font-weight-$(weight_default));
+	font-variation-settings: 'wght' $(weight_variation);
+}

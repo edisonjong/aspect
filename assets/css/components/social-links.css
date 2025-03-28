@@ -1,0 +1,40 @@
+ul.social-links {
+	margin: 0 calc(var(--spacing-4) * -1);
+	flex-direction: row;
+	gap: var(--spacing-1);
+}
+
+.social-link {
+	display: flex;
+	padding: var(--spacing-4);
+	color: var(--color-foreground);
+	background-color: transparent;
+	border-radius: 50%;
+	outline-offset: var(--spacing-1);
+	transition:
+		color 0.15s,
+		background-color 0.15s;
+
+	> svg {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	> span {
+		position: absolute !important;
+		width: 1px !important;
+		height: 1px !important;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		word-wrap: normal !important;
+		border: 0;
+	}
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+	color: var(--color-contrast);
+	background-color: var(--color-background-200);
+}

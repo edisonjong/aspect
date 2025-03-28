@@ -1,0 +1,4 @@
+/* Fixed navbar overlap during page transitions */
+.main > .navbar {
+	view-transition-name: navbar;
+}

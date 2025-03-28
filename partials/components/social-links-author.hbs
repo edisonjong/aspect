@@ -1,0 +1,26 @@
+<ul class="{{class}}">
+	{{~#if twitter~}}
+		<li>
+			<a {{#if has_button}}class="button{{#if has_button_icon}} button-icon{{/if}}{{class_button}}" {{/if}}href="{{twitter_url}}" target="_blank" rel="noopener noreferrer" {{#if has_tippy}}data-tippy-content="{{t "X"}}"{{/if}}>
+				{{> "icons/twitter"}}
+				<span{{#if has_button_icon}} class="screen-reader-text"{{/if}}>{{t "X"}}</span>
+			</a>
+		</li>
+	{{~/if}}
+	{{~#if facebook~}}
+		<li>
+			<a {{#if has_button}}class="button{{#if has_button_icon}} button-icon{{/if}}{{class_button}}" {{/if}}href="{{facebook_url}}" target="_blank" rel="noopener noreferrer" {{#if has_tippy}}data-tippy-content="{{t "Facebook"}}"{{/if}}>
+				{{> "icons/facebook"}}
+				<span{{#if has_button_icon}} class="screen-reader-text"{{/if}}>{{t "Facebook"}}</span>
+			</a>
+		</li>
+	{{~/if}}
+	{{~#if website~}}
+		<li>
+			<a {{#if has_button}}class="button{{#if has_button_icon}} button-icon{{/if}}{{class_button}}" {{/if}}href="{{website}}" target="_blank" rel="noopener noreferrer" {{#if has_tippy}}data-tippy-content="{{t "Website"}}"{{/if}}>
+				{{> "icons/glob"}}
+				<span{{#if has_button_icon}} class="screen-reader-text"{{/if}}>{{t "Website"}}</span>
+			</a>
+		</li>
+	{{~/if~}}
+</ul>

@@ -1,0 +1,135 @@
+/* stylelint-disable at-rule-no-unknown */
+
+:has(> .dropdown) {
+	position: relative;
+}
+
+.dropdown {
+	top: 100%;
+	right: 0;
+	min-width: 140px;
+	padding: var(--spacing-2);
+	margin-top: var(--spacing-8);
+	background-color: var(--dropdown--background-color);
+	box-shadow: var(--shadow);
+	border-radius: var(--radius-4);
+	transform: translateY(-2px);
+	transition:
+		transform 0.15s,
+		visibility 0.15s,
+		opacity 0.15s;
+	z-index: 3;
+
+	/* Zone hover. */
+	&::before {
+		content: '';
+		position: absolute;
+		top: calc(var(--spacing-8) * -1);
+		right: 0;
+		left: 0;
+		height: var(--spacing-8);
+	}
+
+	> ul {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-2);
+		list-style: none;
+		padding-left: 0;
+		margin: 0;
+	}
+
+	.nav-link {
+		gap: var(--spacing-5);
+		text-align: left;
+
+		> svg {
+			width: 1.125rem;
+			height: 1.125rem;
+		}
+
+		[stroke-width] {
+			stroke-width: 1.75;
+		}
+	}
+
+	.nav-separator {
+		margin: var(--spacing-1) calc(var(--spacing-3) * -1);
+	}
+
+	&.show {
+		transform: translateY(0);
+	}
+}
+
+.dropdown-toggle:not(.button) {
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	background-color: transparent;
+
+	> .avatar {
+		color: var(--color-contrast);
+	}
+}
+
+/* Dropdown share. */
+.post-button-share .dropdown {
+	min-width: 200px;
+
+	ul {
+		gap: var(--spacing-1);
+	}
+}
+
+/* Dropdown user. */
+.dropdown-user {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+	width: 290px;
+	padding: var(--spacing-3);
+	border-radius: var(--radius-4);
+
+	> hr {
+		margin: var(--spacing-6) calc(var(--spacing-3) * -1) var(--spacing-1);
+	}
+}
+
+.dropdown-user-login {
+	--avatar--size: var(--avatar-large--size);
+}
+
+.dropdown-user-head {
+	@mixin font-weight medium;
+
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: var(--avatar--size);
+	padding-left: calc(var(--avatar--size) + var(--spacing-4));
+	color: var(--color-contrast);
+	font-size: var(--font-small);
+	margin: var(--spacing-6) var(--spacing-6) 0;
+}
+
+.dropdown-user-head > .avatar {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: translateY(-50%);
+}
+
+.dropdown-user-mail {
+	color: var(--color-secondary);
+}
+
+@media (--breakpoint-max-sm) {
+	.dropdown-share {
+		width: 100%;
+	}
+}

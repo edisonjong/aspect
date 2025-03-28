@@ -1,0 +1,21 @@
+{{#match size "anonymous"}}
+	<span class="avatar{{class}}">
+		{{> "icons-menu/user"}}
+	</span>
+{{else match size "large"}}
+	{{#if src}}
+		{{> "components/image" class=(concat "avatar avatar-large avatar-image" class) size="46" fast=true src=src alt=name}}
+	{{else}}
+		<span class="avatar avatar-letter avatar-large">
+			{{~name~}}
+		</span>
+	{{/if}}
+{{else}}
+	{{#if src}}
+		{{> "components/image" class=(concat "avatar avatar-image" class) size="36" fast=true src=src alt=name}}
+	{{else}}
+		<span class="avatar avatar-letter">
+			{{~name~}}
+		</span>
+	{{/if}}
+{{/match}}

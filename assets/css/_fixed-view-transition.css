@@ -1,0 +1,17 @@
+/* Fixed :view-transition. */
+.post-content {
+	/* Audio. */
+	.kg-audio-thumbnail {
+		clip-path: inset(0 round var(--radius-2));
+	}
+
+	/* Bookmark. */
+	.kg-bookmark-thumbnail {
+		clip-path: inset(0 round var(--radius-2));
+	}
+
+	/* Embed. */
+	.kg-embed-card > iframe {
+		border-radius: 0;
+	}
+}

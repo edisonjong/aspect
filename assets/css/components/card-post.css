@@ -1,0 +1,235 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.card-post {
+	--card--avatar--gap: var(--spacing-6);
+	--card--content--padding: var(--spacing-4);
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-8);
+	padding-bottom: var(--spacing-7);
+	perspective: 1000px;
+}
+
+.card-post-image {
+	position: relative;
+	aspect-ratio: 16/9;
+	overflow: hidden;
+	border-radius: var(--radius-4);
+	background-color: var(--color-background-200);
+	perspective: 1000px;
+	transition: box-shadow 0.5s;
+	z-index: 1;
+
+	> picture {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.card-post:hover & {
+		box-shadow: 0 20px 40px -20px rgba(0 0 0 / 40%);
+	}
+}
+
+.card-post-image-badge {
+	position: absolute;
+	display: flex;
+	gap: var(--spacing-3);
+	right: var(--spacing-6);
+	bottom: var(--spacing-6);
+	z-index: 1;
+
+	> span {
+		@mixin font-weight medium;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: var(--spacing-1) var(--spacing-4);
+		min-width: 1.5rem; /* 24px. */
+		min-height: 1.5rem; /* 24px. */
+		border-radius: var(--radius-1);
+		color: #fff;
+		font-size: var(--font-x-small);
+		background-color: hsla(0deg 0% 2% / 70%);
+	}
+
+	> .card-post-icon {
+		padding-right: var(--spacing-1);
+		padding-left: var(--spacing-1);
+
+		> svg {
+			width: var(--font-small);
+			height: var(--font-small);
+		}
+
+		path {
+			stroke-width: 1.75;
+		}
+	}
+}
+
+.card-post-content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	padding: 0 var(--card--content--padding);
+}
+
+.card-has-author .card-post-content {
+	padding-left: calc(
+		var(--avatar--size) + var(--card--avatar--gap) +
+			var(--card--content--padding)
+	);
+}
+
+.card-post-title {
+	@mixin font-weight semibold;
+
+	font-size: 1rem;
+	margin-bottom: var(--spacing-3);
+
+	> a {
+		display: block;
+		text-decoration: none;
+	}
+
+	> a:hover,
+	> a:focus-visible {
+		color: var(--ghost-accent-color);
+	}
+}
+
+.card-post-author-wrapper {
+	display: flex;
+	gap: 0 var(--spacing-3);
+}
+
+.card-post-author {
+	&:first-child {
+		display: flex;
+		gap: var(--spacing-3);
+	}
+
+	&:nth-child(2) {
+		z-index: 2;
+	}
+
+	&:nth-child(3) {
+		z-index: 1;
+	}
+
+	&:nth-child(2),
+	&:nth-child(3) {
+		position: absolute;
+		top: 0;
+		width: var(--avatar--size);
+		height: var(--avatar--size);
+		left: var(--card--content--padding);
+		pointer-events: none;
+
+		> .card-post-author-image {
+			--avatar--size: 1rem;
+			--avatar--font-size: 0.625rem;
+
+			top: auto;
+			left: auto;
+			bottom: -0.25rem;
+			box-shadow: 0 0 0 2px var(--color-background);
+			border-radius: 50%;
+			pointer-events: visible;
+		}
+	}
+
+	&:nth-child(2) > .card-post-author-image {
+		right: -0.25rem;
+	}
+
+	&:nth-child(3) > .card-post-author-image {
+		right: 0.5rem;
+	}
+}
+
+.card-post-authors {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-4);
+}
+
+.card-post-authors-more {
+	display: flex;
+
+	> button {
+		@mixin font-weight medium;
+
+		flex: 0 0 auto;
+		padding: 0 5px;
+		cursor: pointer;
+    font-size: var(--font-x-small);
+    line-height: 1.3;
+		color: var(--color-secondary);
+    background-color: var(--color-background-200);
+		border: 0;
+    border-radius: 4px;
+		transition: color 0.15s ease, background-color 0.15s ease;
+
+		&[aria-expanded='true'],
+		&:hover {
+			color: var(--color-contrast);
+			background-color: var(--color-background-300);
+		}
+	}
+}
+
+.card-post-author-name {
+	@mixin font-weight medium;
+
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-4);
+	color: var(--color-foreground);
+	text-decoration: none;
+	font-size: var(--font-small);
+
+	&:hover,
+	&:focus-visible {
+		color: var(--ghost-accent-color);
+	}
+}
+
+.card-post-author-image {
+	position: absolute;
+	top: 0;
+	left: var(--card--content--padding);
+	text-decoration: none;
+}
+
+.card-post-meta {
+	@mixin font-weight medium;
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-1) var(--spacing-3);
+	color: var(--color-foreground);
+	font-size: var(--font-small);
+
+	> a {
+		color: var(--color-foreground);
+		text-decoration: none;
+
+		&:hover,
+		&:focus-visible {
+			color: var(--ghost-accent-color);
+		}
+	}
+}

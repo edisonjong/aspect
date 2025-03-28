@@ -1,0 +1,75 @@
+<article class="card card-post{{class}}{{#if feature_image}} card-has-image{{/if}}{{#if has_slider}} card-has-slider{{/if}}{{#primary_author}} card-has-author{{/primary_author}}">
+	<a class="card-post-image" href="{{url}}" aria-label="{{title}}" tabindex="-1">
+		{{#if feature_image}}
+			{{> "components/image" src=feature_image size="300" alt=title}}
+		{{/if}}
+
+		<span class="card-post-image-badge">
+			{{#if reading_time}}
+			<span class="card-post-time">{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+			{{/if}}
+
+			{{#if featured}}
+			<span class="card-post-icon" data-tippy-content="{{t "Featured Post"}}">
+				{{> "icons/flame"}}
+			</span>
+			{{/if}}
+
+			{{#unless access}}
+			<span
+				class="card-post-icon"
+				data-tippy-content="{{#has visibility="paid"}}{{t "Paid Post"}}{{else has visibility="tiers"}}{{tiers}}{{else}}{{t "For Members"}}{{/has}}"
+			>
+				{{> "icons/lock"}}
+			</span>
+			{{/unless}}
+		</span>
+	</a>
+
+	<div class="card-post-content">
+		{{!-- Title. --}}
+		<h3 class="card-post-title"><a href="{{url}}">{{title}}</a></h3>
+
+		{{!-- Author. --}}
+		<div class="card-post-authors">
+			{{#primary_author}}
+				<div class="card-post-author">
+					<a href="{{url}}" class="card-post-author-image" data-tooltip-custom="author" tabindex="-1">
+						{{> "components/avatar" src=profile_image}}
+					</a>
+					<a href="{{url}}" class="card-post-author-name" data-tooltip-custom="author">
+						{{name}}
+					</a>
+					{{> "components/tooltip-author"}}
+				</div>
+			{{/primary_author}}
+
+			{{#match authors.length ">" 1}}
+				{{#foreach authors from="2" to="2"}}
+					<div class="card-post-author">
+						<a href="{{url}}" class="card-post-author-image" data-tooltip-custom="author" tabindex="-1">
+							{{> "components/avatar" src=profile_image}}
+						</a>
+						{{> "components/tooltip-author"}}
+					</div>
+				{{/foreach}}
+
+				<div class="card-post-authors-more">
+					<button aria-label="{{t "View all authors"}}" data-tooltip-custom="authors">+{{#foreach authors}}{{#if @last}}{{@index}}{{/if}}{{/foreach}}</button>
+					{{> "components/tooltip-authors"}}
+				</div>
+			{{/match}}
+		</div>
+
+		{{!-- Meta. --}}
+		<div class="card-post-meta">
+			<time class="card-post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+			{{#if tags}}
+				{{#foreach tags limit=3}}
+				<span class="card-post-meta-divider">&bull;</span>
+				<a class="card-post-tag" href="{{url}}">{{name}}</a>
+				{{/foreach}}
+			{{/if}}
+		</div>
+	</div>
+</article>

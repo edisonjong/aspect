@@ -1,0 +1,131 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#contentFor "body-class"}} page-home{{/contentFor}}
+
+<h1 class="screen-reader-text">{{@site.title}}</h1>
+
+{{!-- Tags. --}}
+{{> "sections/tags" is_home="true"}}
+
+{{!-- Featured posts. --}}
+{{#get "posts" limit=8 filter="featured:true" include="authors,tags,tiers"}}
+	{{#if posts}}
+		{{#match posts.length ">" 1}}
+			<section class="section section-featured">
+				<h2 class="screen-reader-text">{{t "Featured Posts"}}</h2>
+
+				<div class="swiper swiper-horizontal slider-featured">
+					<div class="swiper-wrapper">
+						{{#foreach posts}}
+						<div class="swiper-slide{{#if @first}} swiper-slide-active{{/if}}">
+							{{> "components/card-post-featured" image_fast=@first has_slider=true}}
+						</div>
+						{{/foreach}}
+					</div>
+				</div>
+			</section>
+		{{else}}
+			{{#foreach posts}}
+				{{> "components/card-post-featured" class="section-featured" image_fast="true"}}
+			{{/foreach}}
+		{{/match}}
+	{{/if}}
+{{/get}}
+
+{{!-- Posts. --}}
+{{#> get-posts}}
+	{{> "sections/posts"}}
+{{/get-posts}}
+
+{{!-- Authors. --}}
+{{#get "authors" limit=10 include="count.posts" order="count.posts DESC"}}
+	<section class="section section-authors">
+		<div class="section-head">
+			<h2 class="section-title">{{t "Our Authors"}}</h2>
+		</div>
+
+		{{#match (t "/authors/") "!=" "false"}}
+		<a class="section-button button button-sm button-background-200" href="{{t "/authors/"}}">
+			<span class="label">{{t "All Authors"}}</span>
+			{{> "icons/arrow-narrow-right"}}
+		</a>
+		{{/match}}
+
+		<div class="swiper slider-cards">
+			<div class="swiper-wrapper">
+				{{#foreach authors}}
+				<div class="swiper-slide">
+					{{> "components/card-author"}}
+				</div>
+				{{/foreach}}
+			</div>
+
+			<div class="slider-button-wrapper slider-button-wrapper-prev">
+				<div class="slider-button slider-button-prev swiper-button-disabled">{{> "icons/arrow-left"}}</div>
+			</div>
+			<div class="slider-button-wrapper slider-button-wrapper-next">
+				<div class="slider-button slider-button-next">{{> "icons/arrow-right"}}</div>
+			</div>
+		</div>
+	</section>
+{{/get}}
+
+{{> "sections/subscription"}}
+
+{{!-- Tags sections. --}}
+{{#> "get-tags" setting=@custom.tags_list_sections}}
+	{{#foreach tags}}
+		<section class="section section-tag">
+			<div class="section-head">
+				<h2 class="section-title"><a href="{{url}}">{{name}}</a><span class="title-tag-dot" {{#if accent_color}}style="color:{{accent_color}};"{{/if}}></span></h2>
+				{{#if description}}
+					<p>{{description}}</p>
+				{{/if}}
+			</div>
+
+			<a href="{{url}}" class="section-button button button-sm button-background-200">
+				<span class="label">{{t "View {tag}" tag=name}}</span>
+				{{> "icons/arrow-narrow-right"}}
+			</a>
+
+			{{#get "posts" limit=10 filter="tags:{{slug}}" include="authors,tags,tiers"}}
+				{{#if posts}}
+					<div class="swiper slider-cards slider-posts">
+						<div class="swiper-wrapper">
+							{{#foreach posts}}
+							<div class="swiper-slide">
+								{{> "components/card-post"}}
+							</div>
+							{{/foreach}}
+						</div>
+
+						<div class="slider-button-wrapper slider-button-wrapper-prev">
+							<div class="slider-button slider-button-prev swiper-button-disabled">{{> "icons/arrow-left"}}</div>
+						</div>
+						<div class="slider-button-wrapper slider-button-wrapper-next">
+							<div class="slider-button slider-button-next">{{> "icons/arrow-right"}}</div>
+						</div>
+					</div>
+				{{/if}}
+			{{/get}}
+		</section>
+	{{/foreach}}
+{{/"get-tags"}}
+
+{{#match @site.recommendations_enabled}}
+	<section class="section section-recommendations">
+		<div class="section-head">
+			<h2>{{t "Recommendations"}}</h2>
+		</div>
+
+		{{#match (t "/recommendations/") "!=" "false"}}
+		<a class="button button-sm button-background-200 section-button" href="{{t "/recommendations/"}}">
+			<span class="label">{{t "All Recommendations"}}</span>
+			{{> "icons/arrow-narrow-right"}}
+		</a>
+		{{/match}}
+
+		{{recommendations limit=12}}
+	</section>
+{{/match}}

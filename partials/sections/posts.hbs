@@ -1,0 +1,16 @@
+<section class="section section-posts-grid">
+	<h2 class="screen-reader-text">{{t "Posts"}}</h2>
+
+	<ul class="posts-list"{{^is "paged"}}{{#if pagination.next}} data-posts-per-page="{{@config.posts_per_page}}"{{/if}}{{/is}}>
+		{{#foreach posts}}
+			<li>
+				{{> "components/card-post"}}
+			</li>
+		{{/foreach}}
+	</ul>
+	{{#is "home"}}
+		{{pagination type="load-more-infinite" prev=false append=".posts-list"}}
+	{{else}}
+		{{pagination type="infinite" prev=false append=".posts-list"}}
+	{{/is}}
+</section>

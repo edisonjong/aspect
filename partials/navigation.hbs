@@ -1,0 +1,38 @@
+{{#if isMobile}}
+	{{!-- Limit navigation without separator and categories. --}}
+	{{#foreach navigation limit="10"}}
+		{{#match label.[0] "!=" '-'}}
+			<li class="nav-mobile-item">
+				<a class="nav-link nav-link-{{slug}}{{#if current}} nav-link-current{{/if}}" href="{{url}}">
+					{{> "icons-menu/all"}}
+					<span>{{label}}</span>
+				</a>
+			</li>
+		{{/match}}
+	{{/foreach}}
+{{else}}
+<ul>
+	{{#foreach navigation}}
+		{{#match label "---"}}
+		<li class="nav-separator"></li>
+		{{else}}
+		<li>
+			{{!-- Category. --}}
+			{{#match label.[0] "-"}}
+				{{#match url '#'}}
+					<span class="nav-category"><span class="label">{{label}}</span></span>
+				{{else match url '/#'}}
+					<span class="nav-category"><span class="label">{{label}}</span></span>
+				{{else}}
+					{{> "components/nav-link" class="nav-category" show_icon=../show_icon is_category=true}}
+				{{/match}}
+
+			{{!-- Link. --}}
+			{{else}}
+				{{> "components/nav-link" show_icon=../show_icon is_sidebar=../is_sidebar}}
+			{{/match}}
+		</li>
+		{{/match}}
+	{{/foreach}}
+</ul>
+{{/if}}

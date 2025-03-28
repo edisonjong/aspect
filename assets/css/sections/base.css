@@ -1,0 +1,72 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.section {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-8);
+}
+
+.section-head {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--spacing-7);
+	flex: 1 0 0%;
+	width: 100%;
+	max-width: var(--container--width);
+	margin-bottom: var(--spacing-5);
+}
+
+.section-button {
+	align-self: flex-end;
+	margin-left: auto;
+	margin-bottom: var(--spacing-5);
+}
+
+.section-title > a {
+	text-decoration: none;
+}
+
+/* Tag dot. */
+.section-title > span {
+	display: inline;
+	margin-left: var(--spacing-5);
+	color: var(--color-mute);
+
+	&::before {
+		content: '';
+		display: inline-block;
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background-color: currentcolor;
+		vertical-align: 0.15em;
+	}
+}
+
+/* Title author. */
+.section-title-author {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-6);
+
+	> a {
+		flex: 0 0 auto;
+	}
+}
+
+@media (--breakpoint-max-sm) {
+	.section-head {
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+	.section-button {
+		width: 100%;
+		margin-bottom: var(--spacing-2);
+	}
+
+	.section-title-author .avatar {
+		--avatar-large--size: var(--avatar--size);
+	}
+}
